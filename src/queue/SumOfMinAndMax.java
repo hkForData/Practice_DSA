@@ -49,3 +49,46 @@ public class SumOfMinAndMax {
 	}
 
 }
+
+
+/*public class Solution {
+    public int solve(int[] A, int B) {
+        Deque<Integer> maxDeque = new ArrayDeque<>();
+        Deque<Integer> minDeque = new ArrayDeque<>();
+        int mod = 1000000007;
+        long sum=0;
+        for(int i=0; i<B; i++){
+            while(maxDeque.size()>0 && maxDeque.getLast()<A[i]){
+                maxDeque.removeLast();
+            }
+            while(minDeque.size()>0 && minDeque.getLast()>A[i]){
+                minDeque.removeLast();
+            }
+            maxDeque.addLast(A[i]);
+            minDeque.addLast(A[i]);
+        }
+        sum += maxDeque.getFirst()+minDeque.getFirst();
+        for(int i=B; i<A.length; i++){
+            if(maxDeque.getFirst() == A[i-B]){
+                maxDeque.removeFirst();
+            }
+            if(minDeque.getFirst() == A[i-B]){
+                minDeque.removeFirst();
+            }
+            while(maxDeque.size() > 0 && maxDeque.getLast()<A[i]){
+                maxDeque.removeLast();
+            }
+            maxDeque.addLast(A[i]);
+            while(minDeque.size() > 0 && minDeque.getLast()>A[i]){
+                minDeque.removeLast();
+            }
+            minDeque.addLast(A[i]);
+            
+            sum = sum + maxDeque.getFirst()+minDeque.getFirst();
+        }
+        long ans = ((sum%mod) + mod)%mod;
+        return (int)ans;
+    }
+}
+
+*/

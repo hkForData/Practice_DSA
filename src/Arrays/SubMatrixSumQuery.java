@@ -86,13 +86,49 @@ Explanation 2:
  For query 2: Submatrix contains elements: 11 and 8. So, their sum is 19.
  
 */
-package Arrays_2;
+package Arrays;
 
 public class SubMatrixSumQuery {
+	public static int[] sumOfSubMatrix(int A[][], int B[], int C[], int D[], int E[]) {
+		int n = A.length;
+		int m = A[0].length;
+		int mod = 1000000007;
+		long pfr[][] = new long[n][m];
+		for(int i=0; i<n; i++) {
+			pfr[i][0] = A[i][0];
+			for(int j=1; j<m; j++) {
+				pfr[i][j] = pfr[i][j-1]+A[i][j];
+			}
+		}
+		long pfc[][] = new long[n][m];
+		for(int i=0; i<m; i++) {
+			pfc[0][i] = pfr[0][i];
+			for(int j=1; j<n; j++) {
+				pfc[j][i] = pfc[j-1][i]+pfr[j][i];
+			}
+		}
+		int ans[] = new int[B.length];
+		for(int i=0; i<B.length; i++) {
+			int x1 = B[i]-1;
+			int y1 = C[i]-1;
+			int x2 = D[i]-1;
+			int y2 = E[i]-1;
+			long sum = 0;
+			sum = pfc[x2][y2];
+			if(x1>0) {
+				sum = sum - pfc[x1-1][y2];
+			}
+			if(y1>0) {
+				sum = sum - pfc[x2][y1-1];
+			}
+			if(x1>0 && y1>0) {
+				sum = sum + pfc[x1-1][y1-1];
+			}
+			ans[i] = (int)sum%mod;
+		}
+		return ans;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int A[] = {3, 9, 10, 20, 17, 5, 1};
-		int B = 20;
-		System.out.println(searchInBitonic(A, B));
 	}
 }

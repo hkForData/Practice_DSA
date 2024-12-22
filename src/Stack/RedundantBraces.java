@@ -59,7 +59,7 @@ The only argument given is string A.
 Output Format
 Return 1 if A has redundant braces else, return 0.
 
-
+]]][]][[][]]
 
 Example Input
 Input 1:
